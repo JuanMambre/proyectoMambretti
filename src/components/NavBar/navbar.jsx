@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import {FaBars, FaTimes, FaShoppingCart} from 'react-icons/fa'
+import {FaBars, FaTimes} from 'react-icons/fa'
 import { Link } from 'react-scroll';
+import Cart from '../CartWidget/Cart'
+
 
 const NavBar = () => {
 
@@ -38,10 +40,7 @@ const NavBar = () => {
                         <span className=' absolute -bottom-0 top-[1.30rem] w-0 left-0 h-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 transition-all group-hover:w-full'/>
                     </li>
                 ))}
-                    <li className="relative">
-                        <FaShoppingCart size={25} />
-                        <span className="absolute top-0 right-0 bg-red-500 rounded-full text-white text-xs w-3.5 h-3.5 flex items-center justify-center cursor-pointer">1</span>
-                    </li>
+                   <Cart/> 
             </ul>
           
             <div onClick={()=>setNav(!nav)} className="cursor-pointer pr-4 z-10 text-white-500 md:hidden">
