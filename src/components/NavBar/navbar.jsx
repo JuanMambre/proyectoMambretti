@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import {FaBars, FaTimes} from 'react-icons/fa'
+import {FaBars, FaTimes, FaShoppingCart} from 'react-icons/fa'
 import { Link } from 'react-scroll';
-
 
 const NavBar = () => {
 
@@ -27,19 +26,24 @@ const NavBar = () => {
     ];
 
     return (
-        <div className="flex justify-between items-center w-full h-20 text-white fixed bg-black">
+        <div className="flex justify-between items-center  w-full h-20 text-white fixed bg-black">
             <div>
                 <h1 className="text-5xl font-signature ml-7">InnovaTech</h1>
             </div>
 
-            <ul className="hidden md:flex ">
+            <ul className="hidden md:flex space-x-2 mr-7">
                 {links.map(({ id, link }) => (
-                    <li key={id} className="px-4 cursor-pointer capitalize font-medium text-white relative group">
+                    <li key={id} className="px-2 cursor-pointer capitalize font-medium text-white relative group">
                         <Link to={link} smooth duration={500}> {link} </Link>
                         <span className=' absolute -bottom-0 top-[1.30rem] w-0 left-0 h-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 transition-all group-hover:w-full'/>
                     </li>
                 ))}
+                    <li className="relative">
+                        <FaShoppingCart size={25} />
+                        <span className="absolute top-0 right-0 bg-red-500 rounded-full text-white text-xs w-3.5 h-3.5 flex items-center justify-center cursor-pointer">1</span>
+                    </li>
             </ul>
+          
             <div onClick={()=>setNav(!nav)} className="cursor-pointer pr-4 z-10 text-white-500 md:hidden">
                 {nav ? <FaTimes size={30} /> : <FaBars size={30}/>}
             </div>
@@ -48,11 +52,13 @@ const NavBar = () => {
                 <ul className='flex flex-col justify-center items-center absolute top-0 w-full h-screen bg-gradient-to-b from-black to-gray-800 text-white'>
                 
                  {links.map(({ id, link }) => (
-                     <li key={id} className=' px-4 cursor-pointer capitalize py-6 text-4xl'>
+                     <li key={id} className=' px-2 cursor-pointer capitalize py-6 text-4xl'>
                           <Link onClick={()=> setNav(!nav)} to={link} smooth duration={500}> {link} </Link>
                      </li>
                  ))}
+                   
                 </ul>
+                 
              )} 
              
              </div>
