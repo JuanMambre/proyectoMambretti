@@ -30,37 +30,40 @@ const NavBar = () => {
     return (
         <div className="flex justify-between items-center  w-full h-20 text-white fixed bg-black">
             <div>
-                <h1 className="text-5xl font-signature ml-7">InnovaTech</h1>
+                <h1 className="text-5xl font-signature mr-8
+                ">InnovaTech</h1>
             </div>
-
-            <ul className="hidden md:flex space-x-2 mr-7">
+        <div  className=' mr-5'>
+            <ul className="hidden md:flex space-x-2 justify-center items-center ">
                 {links.map(({ id, link }) => (
                     <li key={id} className="px-2 cursor-pointer capitalize font-medium text-white relative group">
                         <Link to={link} smooth duration={500}> {link} </Link>
-                        <span className=' absolute -bottom-0 top-[1.30rem] w-0 left-0 h-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 transition-all group-hover:w-full'/>
+                        <span className=' absolute -bottom-0 top-[1.30rem] w-0 left-0 h-0.5 bg-gradient-to-r  from-violet-400 to-violet-900 transition-all group-hover:w-full'/>
                     </li>
                 ))}
-                   <Cart/> 
+                <Cart/> 
             </ul>
+        </div>
+            
           
-            <div onClick={()=>setNav(!nav)} className="cursor-pointer pr-4 z-10 text-white-500 md:hidden">
-                {nav ? <FaTimes size={30} /> : <FaBars size={30}/>}
-            </div>
+            <div onClick={()=>setNav(!nav)} className="flex justify-center items-center space-x-5 cursor-pointer pr-4 z-10 text-white-500 md:hidden">
+                <Cart/>
+                {nav ? <FaTimes size={30} />  : <FaBars size={30} />}
+                </div>
 
             {nav && (
+              
                 <ul className='flex flex-col justify-center items-center absolute top-0 w-full h-screen bg-gradient-to-b from-black to-gray-800 text-white'>
-                
-                 {links.map(({ id, link }) => (
-                     <li key={id} className=' px-2 cursor-pointer capitalize py-6 text-4xl'>
+                    {links.map(({ id, link }) => (
+                        <li key={id} className=' px-2 cursor-pointer capitalize py-6 text-4xl'>
                           <Link onClick={()=> setNav(!nav)} to={link} smooth duration={500}> {link} </Link>
-                     </li>
-                 ))}
-                   
-                </ul>
-                 
-             )} 
-             
-             </div>
+                        </li>
+                    ))}
+                </ul>    
+            )} 
+           
+                
+        </div>
     );
 };
 
