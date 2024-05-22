@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import AboutUs from './components/About/AboutUs'
 import Home from './components/Home/Home'
 import Contact from './components/Contact/Contact'
+import ItemDetail from './components/Detail/ItemDetail'
 
 
 
@@ -18,7 +19,7 @@ function App() {
       <Routes>
 
         <Route 
-          path='/home'
+          path='/'
           element={<Home/>}
         />
 
@@ -35,6 +36,11 @@ function App() {
         <Route 
           path='/contact'
           element={<Contact/>}
+        />
+
+        <Route
+          path='/detail/:id'
+          element={<ItemDetail />}
         />
 
       </Routes>

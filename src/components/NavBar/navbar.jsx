@@ -10,10 +10,6 @@ const NavBar = () => {
 
     const links = [
         {
-            id: 1,
-            link: "home"
-        },
-        {
             id: 2,
             link: "about"
         },
@@ -30,7 +26,7 @@ const NavBar = () => {
     return (
         <div className="flex justify-between items-center  w-full h-20 text-white fixed bg-black">
             <div>
-                <Link to='/home'>
+                <Link to='/'>
                     <h1 className="text-5xl font-signature mr-8 ml-7">IT</h1>
                 </Link>
             </div>

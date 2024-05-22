@@ -23,3 +23,4 @@ const ItemCard = ({ titulo, imagen, descripcion, id, stock }) => {
 };
 
 export default ItemCard;
+
