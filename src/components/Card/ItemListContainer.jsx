@@ -1,19 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import { getProducts } from '../../../asyncMock';
 import ItemCard from './ItemCard';
+import CategoryFilter from '../Filter/CategoryFilter';
+import { useParams } from 'react-router-dom';
 
 const ItemListContainer = () => {
+  const { category } = useParams();
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedCategory, setSelectedCategory] = useState(category || null);
   const itemsPerPage = 3;
 
   useEffect(() => {
     getProducts.then((data) => {
       setProducts(data);
+      if (category) {
+        setFilteredProducts(data.filter(product => product.categoria === category));
+      } else {
+        setFilteredProducts(data);
+      }
     });
-  }, []);
+  }, [category]);
 
-  const totalPages = Math.ceil(products.length / itemsPerPage);
+  useEffect(() => {
+    if (selectedCategory) {
+      setFilteredProducts(products.filter(product => product.categoria === selectedCategory));
+    } else {
+      setFilteredProducts(products);
+    }
+    setCurrentPage(1); // Reset to first page on category change
+  }, [selectedCategory, products]);
+
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
   const handleClick = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -22,8 +41,10 @@ const ItemListContainer = () => {
   const getCurrentPageItems = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    return products.slice(startIndex, endIndex);
+    return filteredProducts.slice(startIndex, endIndex);
   };
+
+  const categories = [...new Set(products.map(product => product.categoria))];
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-black via-black to-gray-800 py-10">
@@ -34,6 +55,11 @@ const ItemListContainer = () => {
             Hola, somos una empresa de venta de tecnología.
           </p>
         </div>
+        <CategoryFilter
+          categories={categories}
+          selectedCategory={selectedCategory}
+          onSelectCategory={setSelectedCategory}
+        />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {getCurrentPageItems().map((p) => (
             <ItemCard
